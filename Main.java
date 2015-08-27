@@ -38,13 +38,15 @@ class DrunkMouse implements Runnable {
 		int xAmount = 0;
 		int yAmount = 0;
 		int moveSpeed = 50; // smaller = faster
+		int moveAmount = 30;
 		while(true) {
-			xAmount = random.nextInt(20) - 10;
-			yAmount = random.nextInt(20) - 10;
+			xAmount = random.nextInt(moveAmount) - 10;
+			yAmount = random.nextInt(moveAmount) - 10;
 			try {
 				mousePosition = MouseInfo.getPointerInfo().getLocation();
 				mouseControl = new Robot();
-				mouseControl.mouseMove(mousePosition.x + xAmount, mousePosition.y + yAmount);
+				mouseControl.mouseMove(mousePosition.x + (random.nextBoolean() ? xAmount : -xAmount), 
+									   mousePosition.y + (random.nextBoolean() ? yAmount : -yAmount));
 			} catch (Exception error) {
 				error.printStackTrace();
 			}
